@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+    <TextView
+        android:id="@+id/tv_timedd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="8月8日"
+        android:gravity="center"
+        android:background="@drawable/frame"
+        android:layout_marginRight="-1dp"
+        />
+    <TextView
+        android:id="@+id/tv_weeder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="星期二"
+        android:gravity="center"
+        android:background="@drawable/frame"
+        android:layout_marginTop="-1dp"
+        android:layout_marginRight="-1dp"
+        />
+    <TextView
+        android:id="@+id/tv_weather"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="晴"
+        android:gravity="center"
+        android:layout_marginTop="-1dp"
+        android:background="@drawable/frame"
+        android:layout_marginRight="-1dp"
+        />
+    <ImageView
+        android:id="@+id/iv_rvp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/frame"
+        android:layout_marginTop="-1dp"
+        android:src="@drawable/fine"
+        android:layout_marginRight="-1dp"
+        />
+
+</LinearLayout>
