@@ -126,5 +126,7 @@ dependencies {
     implementation 'com.haibin:calendarview:3.6.2'
     //LitePal 数据库框架
     implementation 'org.litepal.android:java:3.0.0'
+    //生产二维码库
+    implementation 'com.google.zxing:core:3.3.0'
 
 }

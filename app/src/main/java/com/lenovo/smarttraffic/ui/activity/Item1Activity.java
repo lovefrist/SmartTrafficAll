@@ -1,5 +1,6 @@
 package com.lenovo.smarttraffic.ui.activity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -79,6 +80,7 @@ public class Item1Activity extends BaseActivity {
               titleList.add(itemcontent);
             }while (cursor.moveToNext());
         }
+
         if (titleList.size() > 0) {
             basePagerAdapter = new BasePagerAdapter(getSupportFragmentManager(), titleList);
         } else {
@@ -147,7 +149,7 @@ public class Item1Activity extends BaseActivity {
                    do {
                       String itemcontent = cursor.getString(cursor.getColumnIndex("itemcontent"));
                        String state = cursor.getString(cursor.getColumnIndex("state"));
-                       Log.d(TAG, "onActivityResult: "+itemcontent+"\t"+state);
+
                    }while (cursor.moveToNext());
                }
 
@@ -161,6 +163,7 @@ public class Item1Activity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
         headerLayout.setBackgroundColor(CommonUtil.getInstance().getColor());
     }
 

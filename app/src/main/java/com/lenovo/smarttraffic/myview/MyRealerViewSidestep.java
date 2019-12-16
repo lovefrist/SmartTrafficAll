@@ -3,6 +3,7 @@ package com.lenovo.smarttraffic.myview;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
@@ -20,7 +21,8 @@ public class MyRealerViewSidestep extends HorizontalScrollView {
     private float endDx;
     private boolean switchItem= false;
     private static final String TAG = "MyRealerViewSidestep";
-
+    /**设置全局变量存储MyRealerViewSidestep对象方便引用对象*/
+    public static ArrayList<MyRealerViewSidestep> sidestepArrayList = new ArrayList<>();
     public MyRealerViewSidestep(Context context) {
         super(context);
     }
@@ -32,13 +34,11 @@ public class MyRealerViewSidestep extends HorizontalScrollView {
     public MyRealerViewSidestep(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
-
-    public static ArrayList<MyRealerViewSidestep> sidestepArrayList = new ArrayList<>();
-
     @Override
     protected void onDraw(Canvas canvas) {
         //将itemViewHonder放入静态集合里面
         int indexclass = sidestepArrayList.indexOf(this);
+
         if (indexclass == -1) {
             sidestepArrayList.add(this);
         }
@@ -58,7 +58,9 @@ public class MyRealerViewSidestep extends HorizontalScrollView {
         super.onDraw(canvas);
     }
 
-
+   public void  closeDown(){
+        smoothScrollTo(0,0);
+    }
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         switch (ev.getAction()) {
@@ -77,7 +79,7 @@ public class MyRealerViewSidestep extends HorizontalScrollView {
                 int SD = (int) -(endDx - startDx);
                 //如果手指的移动距离大于右边布局宽带的三分之二松开手指时会自动滑倒最大距离否则反正
 
-                if (SD>(rightLayoutWidth/1.5)){
+                if (SD>(rightLayoutWidth/2)){
                     smoothScrollTo(rightLayoutWidth,0);
                     switchItem = true;
                     /**防止点击一时另外一个还没有离开就滑动
@@ -90,12 +92,10 @@ public class MyRealerViewSidestep extends HorizontalScrollView {
                         }
                     }
                 }else {
-                    if (getScaleX()==0){
-                        switchItem =false;
-                    }
-                    if (!switchItem){
+//                    if (getScaleX()==0){
+//                        switchItem =false;
+//                    }
                         smoothScrollTo(0,0);
-                    }
 
                 }
                 return true;
@@ -103,6 +103,12 @@ public class MyRealerViewSidestep extends HorizontalScrollView {
                 return super.onTouchEvent(ev);
         }
 
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+
+        super.onDetachedFromWindow();
     }
 
     @Override

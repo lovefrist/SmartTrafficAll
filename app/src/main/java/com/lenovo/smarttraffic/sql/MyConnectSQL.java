@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 public class MyConnectSQL extends SQLiteOpenHelper {
     /**
@@ -16,33 +17,28 @@ public class MyConnectSQL extends SQLiteOpenHelper {
     private static final String CONTENT_SQL = "create table contentItem("
             + "id integer primary key autoincrement,"
             + "state int,"
+            + "sqrt int,"
             + "itemcontent text)";
 
     private static final String USERS_USER = "create table userData("
-            +"id integer primary key autoincrement, "
+            + "id integer primary key autoincrement, "
             + "UserName text,"
             + "AdminName text,"
             + "Phone text,"
             + "Time text,"
             + "Admin text,"
-            + "imgUri text"
+            + "imgUri text,"
+            + "psex text,"
+            + "state int,"
+            + "StateTop int"
             + ")";
 
-    private static final String USER_USER = "create table userCollection("
-            +"id integer primary key autoincrement, "
-            + "UserName text,"
-            + "AdminName text,"
-            + "Phone text,"
-            + "Time text,"
-            + "Admin text,"
-            + "imgUri text"
-            + ")";
     private static int ActivityIDThis;
-    private MyConnectSQL connectSQL;
+    private static MyConnectSQL connectSQL;
     private Context context;
 
     public static MyConnectSQL initMySQL(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version, int ActivityID) {
-        MyConnectSQL connectSQL = new MyConnectSQL(context, name, factory, version);
+        connectSQL = new MyConnectSQL(context, name, factory, version);
         ActivityIDThis = ActivityID;
         return connectSQL;
     }
@@ -61,11 +57,9 @@ public class MyConnectSQL extends SQLiteOpenHelper {
             case 2:
                 db.execSQL(USERS_USER);
                 break;
-            case 3:
-                db.execSQL(USER_USER);
+
             default:
         }
-
     }
 
     @Override

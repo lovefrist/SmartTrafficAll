@@ -15,6 +15,7 @@ import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -48,9 +49,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private final static String LOGIN_URL = "http://192.168.3.5:8088/transportservice/action/user_login.do";
     private final static String GetSUser = "http://192.168.3.5:8088/transportservice/action/GetSUserInfo.do";
     private final static String REGULAR_Length = "^.{0,15}$";
-    private final static String RO1 = "RO1";
-    private final static String RO2 = "RO2";
-    private final static String RO3 = "RO3";
+    private final static String RO1 = "R01";
+    private final static String RO2 = "R02";
+    private final static String RO3 = "R03";
     /**
      * 输入运行输入的位数
      */
@@ -191,17 +192,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 map.put("UserPwd", mEditTextPassword.getText().toString());
                 String JsonData = NetworkUtil.getJsonData(map, LOGIN_URL);
                 JSONObject jsonObject = new JSONObject(JsonData);
+                Log.d(TAG, "logNewApp: "+JsonData);
                 String ok = "S";
                 String result = "RESULT";
+                String ROT = jsonObject.getString("UserRole");
                 if (ok.equals(jsonObject.getString(result))) {
                     addData();
                     handler.post(() -> {
-                        loyalerDialog.dismiss();
-                        Toast toast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
-                        toast.setText("登陆成功");
-                        toast.show();
                         user = mEditTextName.getText().toString();
-                        getAllUserName();
+                        getAllUserName(ROT);
                     });
 
                 } else {
@@ -282,64 +281,84 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
      * g根据账号的内容返回该账户的名字
      * 如果为管理员则将用户的所以信息存入数据库
      */
-    private void getAllUserName() {
+    private void getAllUserName(String ROT) {
         service.execute(() -> {
             try {
                 HashMap map = new HashMap(1);
                 map.put("UserName", "user1");
                 String data = NetworkUtil.getJsonData(map, GetSUser);
                 JSONObject jsonObjectDETAIL = new JSONObject(data);
+                Log.d(TAG, "getAllUserName: "+data);
                 JSONArray Detail = jsonObjectDETAIL.getJSONArray("ROWS_DETAIL");
-                for (int i = 0; i < Detail.length(); i++) {
-                    JSONObject userAll = Detail.getJSONObject(i);
-                    if (userAll.getString("username").equals(mEditTextName.getText().toString())) {
-                        if (!("R01".equals(userAll.getString("UserRole")))) {
+                        if (!(RO1.equals(ROT))) {
                             int[] icon = new int[]{R.drawable.touxiang_1, R.drawable.touxiang_2};
                             SQLiteDatabase db = MyConnectSQL.initMySQL(this, "userAdmin", null, 1, 2).getWritableDatabase();
                             Cursor cursor = db.query("userData", null, null, null, null, null, null);
                             if (!cursor.moveToFirst()) {
+                                for (int i = 0; i < Detail.length(); i++) {
+                                    JSONObject userAll = Detail.getJSONObject(i);
 
-                                do {
                                     ContentValues values = new ContentValues();
                                     String username = userAll.getString("username");
                                     String pname = userAll.getString("pname");
                                     String ptel = userAll.getString("ptel");
-                                    String datetime = userAll.getString("datetime");
+                                    String datetime = userAll.getString("pregisterdate");
+                                    String psex = userAll.getString("psex");
                                     values.put("UserName", username);
                                     values.put("AdminName", pname);
                                     values.put("Phone", ptel);
                                     values.put("Time", datetime);
-                                  String roData =   userAll.getString("UserRole");
-                                    switch (roData){
+                                    values.put("psex", psex);
+                                    HashMap<String, String> ROTMap = new HashMap<>(1);
+                                    ROTMap.put("UserName", username);
+                                    ROTMap.put("UserPwd", "123456");
+                                    String JsonData = NetworkUtil.getJsonData(ROTMap, LOGIN_URL);
+                                    JSONObject ObjectROT = new JSONObject(JsonData);
+                                    String roData = ObjectROT.getString("UserRole");
+                                    switch (roData) {
                                         case RO1:
                                             values.put("Admin", "普通用户");
                                             break;
                                         case RO2:
                                             values.put("Admin", "一般管理员");
                                             break;
-                                        case  RO3:
+                                        case RO3:
                                             values.put("Admin", "超级管理员");
                                             break;
                                         default:
+                                            values.put("Admin", "暂无相关数据（游客）");
                                     }
-                                    values.put("imgUri", ""+icon[i % 2]);
+                                    if("女".equals(psex)){
+                                        values.put("imgUri",icon[0]);
+                                    }else {
+                                        values.put("imgUri",icon[1]);
+                                    }
+                                    values.put("state",0);
                                     db.insert("userData", null, values);
-                                } while (cursor.moveToNext());
+                                }
                             }
                         }
-                        String name = userAll.getString("pname");
-                        InitApp.getHandler().post(() -> {
+                        String name ="";
+                        for (int i=0;i<Detail.length();i++){
+                            JSONObject dataObject = Detail.getJSONObject(i);
+                            if (dataObject.getString("username").equals(mEditTextName.getText().toString())){
+                                name = dataObject.getString("pname");
+                            }
+                        }
+                String finalName = name;
+                InitApp.getHandler().post(() -> {
+                    loyalerDialog.dismiss();
+                    Toast toast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
+                    toast.setText("登陆成功");
+                    toast.show();
                             Intent intent = new Intent();
-                            intent.putExtra("User", name);
+                            intent.putExtra("User", finalName);
                             setResult(1, intent);
                             finish();
                         });
-
-
-                    }
-                }
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
+                loyalerDialog.dismiss();
             }
         });
     }

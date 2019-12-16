@@ -10,14 +10,14 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.widget.Toast;
 
-import com.lenovo.smarttraffic.myinterface.BroadInter;
+import com.lenovo.smarttraffic.myinterface.BroadListener;
 
 /**
  *
  * 监听网络状况
  * */
 public class Bodywork extends BroadcastReceiver {
-    private BroadInter mbroadInter;
+    private BroadListener mbroadInter;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -47,7 +47,7 @@ public class Bodywork extends BroadcastReceiver {
         }
     }
 
-    public void getonClick(BroadInter broadInter) {
-        mbroadInter = broadInter;
+    public void getonClick(BroadListener broadlistener) {
+        mbroadInter = broadlistener;
     }
 }

@@ -273,7 +273,7 @@ public class ForecastActivity extends BaseActivity {
                     String[] temperatures = temperature.split("~");
                     String wData = object.getString("WData");
                     String type = object.getString("type");
-                    Map map1 = new HashMap();
+                    Map map1 = new HashMap(5);
                     if (i == 1) {
 
                         String week = new SimpleDateFormat("EEE").

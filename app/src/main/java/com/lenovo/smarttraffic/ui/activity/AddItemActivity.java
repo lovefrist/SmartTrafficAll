@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +26,8 @@ import com.lenovo.smarttraffic.util.CommonUtil;
 import java.sql.SQLDataException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 
 import butterknife.BindView;
 
@@ -45,6 +48,7 @@ public class AddItemActivity extends BaseActivity {
     private ArrayList<String> topData, bottomDate;
     private RecyhelperAdapter topAdapter, bottomAdapter;
     private  SQLiteDatabase db;
+    private ArrayList<HashMap<String,Object>> sqrtDataList = new ArrayList<>();
 
     @Override
     protected int getLayout() {
@@ -62,9 +66,10 @@ public class AddItemActivity extends BaseActivity {
         topData = new ArrayList<>();
         bottomDate = new ArrayList<>();
         if (!cursor.moveToFirst()){
-            String[] data = CommonUtil.getStringArray(R.array.news_info);
-            for (int i =0;i<data.length;i++){
 
+            String[] data = CommonUtil.getStringArray(R.array.news_info);
+            Log.d(TAG, "onCreate: "+data);
+            for (int i =0;i<data.length;i++){
                 ContentValues values = new ContentValues();
                 if (i==0){
                     values.put("state",1);
@@ -75,24 +80,28 @@ public class AddItemActivity extends BaseActivity {
                 db.insert("contentItem",null,values);
             }
         }
-        ContentValues values1 =new ContentValues();
-        values1.put("state",1);
-        db.update("contentItem",values1,"itemcontent = ?",new String[]{"推荐"});
-
         if (cursor.moveToFirst()) {
-            int i =0;
+
             do {
-                Log.d(TAG, "onCreate: " + cursor.getString(cursor.getColumnIndex("itemcontent"))+"\t"+i++);
+
                 int state =cursor.getInt(cursor.getColumnIndex("state"));
-                Log.d(TAG, "onCreate: "+state);
+
                 if (state != 0){
-                    topData.add(cursor.getString(cursor.getColumnIndex("itemcontent")));
+                    HashMap<String,Object> map = new HashMap<>(2);
+                    map.put("content",cursor.getString(3));
+                    map.put("sqrt",cursor.getString(2));
+                    sqrtDataList.add(map);
                 }else {
                     bottomDate.add(cursor.getString(cursor.getColumnIndex("itemcontent")));
                 }
             } while (cursor.moveToNext());
         }
-
+        Log.d(TAG, "onCreate: "+bottomDate.toString()+"\t"+sqrtDataList.toString());
+        sqrtData();
+        Log.d(TAG, "onCreate: "+topData.toString()+"\t"+sqrtDataList.toString());
+        for (int i = 0; i <sqrtDataList.size() ; i++) {
+            topData.add(sqrtDataList.get(i).get("content").toString());
+        }
         rvTop.setLayoutManager(new GridLayoutManager(this, 5));
         topAdapter = new RecyhelperAdapter(this, topData, true);
         rvTop.setAdapter(topAdapter);
@@ -111,6 +120,7 @@ public class AddItemActivity extends BaseActivity {
 
             @Override
             public void onClick(int position) {
+                SystemClock.sleep(300);
                 bottomDate.add(topData.remove(position));
                 topAdapter.notifyDataSetChanged();
                 bottomAdapter.notifyDataSetChanged();
@@ -124,19 +134,19 @@ public class AddItemActivity extends BaseActivity {
                 dataTob[i] = topData.get(i);
                 ContentValues values = new ContentValues();
                 values.put("state",1);
+                values.put("sqrt",i);
                 db.update("contentItem",values,"itemcontent = ?",new String[]{topData.get(i)});
-                Log.d(TAG, "topData: "+topData.get(i));
+
             }
 
             for (int i=0;i<bottomDate.size();i++){
                 dataBottow[i] = bottomDate.get(i);
                 ContentValues values = new ContentValues();
                 values.put("state",0);
+                values.put("sqrt",20);
                 db.update("contentItem",values,"itemcontent = ?",new String[]{bottomDate.get(i)});
-                Log.d(TAG, "bottomDate: "+bottomDate.get(i));
             }
             intent.putExtra("contentall", dataTob);
-
             setResult(8, intent);
             finish();
         });
@@ -149,6 +159,7 @@ public class AddItemActivity extends BaseActivity {
 
             @Override
             public void onClick(int position) {
+
                 topData.add(bottomDate.remove(position));
                 topAdapter.notifyDataSetChanged();
                 bottomAdapter.notifyDataSetChanged();
@@ -158,8 +169,21 @@ public class AddItemActivity extends BaseActivity {
         initData();
     }
 
-    private void initData() {
+   private void sqrtData(){
+     Collections.sort(sqrtDataList, new Comparator<HashMap<String, Object>>() {
+         @Override
+         public int compare(HashMap<String, Object> o1, HashMap<String, Object> o2) {
+             Log.d(TAG, "compare: "+o1.get("sqrt").toString()+"\t"+o2.get("sqrt").toString());
+             if (Integer.parseInt(o1.get("sqrt").toString())>Integer.parseInt(o2.get("sqrt").toString())){
+                 return 1;
+             }else {
+                 return -1;
+             }
+         }
+     });
+    }
 
+    private void initData() {
         ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.Callback() {
             @Override
             /**指定在此ViewHolder上允许哪些移动。*/
@@ -182,14 +206,12 @@ public class AddItemActivity extends BaseActivity {
                     if (target.getAdapterPosition() != 0) {
                         if (viewHolder.getAdapterPosition() >= 0 && viewHolder.getAdapterPosition() < topData.size() && target.getAdapterPosition() >= 0 && target.getAdapterPosition() < topData.size()) {
                             Collections.swap(topData, viewHolder.getAdapterPosition(), target.getAdapterPosition());
+
                             topAdapter.notifyItemMoved(viewHolder.getAdapterPosition(), target.getAdapterPosition());
                             return false;
                         }
                     }
                 }
-
-
-//                Log.d(TAG, "onMove: " + list.toString());
                 return true;
             }
 
@@ -277,6 +299,8 @@ public class AddItemActivity extends BaseActivity {
 ////                }
 //            }
         });
+        //手动打开拖拽功能
+//        helper.startDrag();
         helper.attachToRecyclerView(rvTop);
     }
 

@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.lenovo.smarttraffic.R;
-import com.lenovo.smarttraffic.myinterface.ClickItemInter;
+import com.lenovo.smarttraffic.myinterface.ClickItemlistener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,7 +28,7 @@ public class ConsultationAdapter extends RecyclerView.Adapter {
     private static final String TAG = "ConsultationAdapter";
 
     private Context context;
-    private static ClickItemInter clickItemInter;
+    private static ClickItemlistener clickItemlistener;
 
     private ArrayList<HashMap<String, String>> hashMapList;
 
@@ -61,7 +61,7 @@ public class ConsultationAdapter extends RecyclerView.Adapter {
             ((NoImagesViewHolder) holder).tTitleNo.setText(map.get("title").toString());
             ((NoImagesViewHolder) holder).tDate.setText(map.get("createTime").toString());
             ((NoImagesViewHolder) holder).linearLayoutNo.setOnClickListener(v -> {
-                clickItemInter.onClick(map);
+                clickItemlistener.onClick(map);
             });
             }
         } else {
@@ -71,7 +71,7 @@ public class ConsultationAdapter extends RecyclerView.Adapter {
                 ((YesImagesViewHolder) holder).tTitleYes.setText(map.get("title").toString());
                 ((YesImagesViewHolder) holder).tTime.setText(map.get("createTime").toString());
                 ((YesImagesViewHolder) holder).linearLayoutYes.setOnClickListener(v -> {
-                    clickItemInter.onClick(map);
+                    clickItemlistener.onClick(map);
                 });
             }
         }
@@ -127,8 +127,8 @@ public class ConsultationAdapter extends RecyclerView.Adapter {
         }
     }
 
-    public static void getClick(ClickItemInter itmeInter) {
-        clickItemInter = itmeInter;
+    public static void getClick(ClickItemlistener itmeInter) {
+        clickItemlistener = itmeInter;
     }
 }
 

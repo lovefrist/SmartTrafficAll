@@ -66,15 +66,16 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         super.onCreate(savedInstanceState);
         initView();
         initData();
-        if (savedInstanceState != null) {
-            //使用fragmentation加载根组件
-            loadMultipleRootFragment(R.id.container, 0, mMainContent, mDesignFragment);
-            // 恢复 recreate 前的位置
-            showFragment(savedInstanceState.getInt(POSITION));
-            bottomNavigation.setSelectedItemId(savedInstanceState.getInt(SELECT_ITEM));
-        } else {
-            showFragment(FRAGMENT_MAIN);
-        }
+//        if (savedInstanceState != null) {
+//            //使用fragmentation加载根组件
+//            loadMultipleRootFragment(R.id.container, 0, mMainContent, mDesignFragment);
+//            // 恢复 recreate 前的位置
+//            showFragment(savedInstanceState.getInt(POSITION));
+//            bottomNavigation.setSelectedItemId(savedInstanceState.getInt(SELECT_ITEM));
+//        } else {
+//
+//        }
+        showFragment(FRAGMENT_MAIN);
     }
 
     private void initView() {
@@ -190,7 +191,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case INTENT_LOG:
                 if (data != null) {

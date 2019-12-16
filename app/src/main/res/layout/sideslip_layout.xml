@@ -4,8 +4,8 @@
     android:id="@+id/scroll_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:fillViewport="true"
     android:layout_marginBottom="10dp"
+    android:fillViewport="true"
     android:scrollbars="none"
     android:background="#fff"
     >
@@ -29,11 +29,11 @@
                 />
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:paddingLeft="@dimen/margin_30"
-                android:paddingVertical="5dp"
+                android:paddingVertical="3dp"
                 >
                 <TextView
                     android:id="@+id/tv_userName"
@@ -71,7 +71,7 @@
                 />
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
 
@@ -82,8 +82,8 @@
                     android:layout_height="wrap_content"
                     android:background="#D6DD19"
                     android:text="一般管理员"
-                    android:paddingHorizontal="40dp"
-                    android:paddingVertical="10dp"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="8dp"
                     android:layout_gravity="right"
                     />
 
@@ -92,11 +92,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    android:layout_marginRight="20dp"
-                    android:padding="10dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="5dp"
                     android:background="@drawable/btn_bendframe_nocolor"
                     android:text="查看详情"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="7dp"
                     />
 
 
@@ -116,12 +116,12 @@
 
             <TextView
                 android:id="@+id/tv_collect"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:gravity="center"
                 android:text="收藏"
-                android:textColor="#00cc33"
+                android:paddingHorizontal="20dp"
+                android:background="#00cc33"
                 android:textSize="26sp" />
 
         </LinearLayout>

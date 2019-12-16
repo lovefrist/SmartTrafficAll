@@ -150,6 +150,11 @@ public class FirstFragment extends BaseFragment {
             });
         } catch (IOException | JSONException e) {
             e.printStackTrace();
+            Log.d(TAG, "requestData: 网络出现错误");
+            InitApp.getHandler().post(()->{
+                refreshPage(null);
+            });
+
             return null;
         }
         if (viewpagerRefresh != 0) {

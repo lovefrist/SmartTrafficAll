@@ -3,6 +3,7 @@ package com.lenovo.smarttraffic.ui.activity;
 import android.os.Bundle;
 
 import com.lenovo.smarttraffic.R;
+import com.lenovo.smarttraffic.myview.MyRealerViewSidestep;
 
 /**
  *

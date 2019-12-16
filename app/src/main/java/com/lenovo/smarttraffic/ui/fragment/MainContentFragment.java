@@ -188,7 +188,7 @@ public class MainContentFragment extends BaseFragment {
         intentFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
         work = new Work();
 //        //注册广
-//        work.getonClick(new BroadInter() {
+//        work.getonClick(new BroadListener() {
 //            @Override
 //            public void onClick() {
 //                refreshPage(null);
@@ -213,7 +213,6 @@ public class MainContentFragment extends BaseFragment {
             jsonObject = new JSONObject(jsonData);
             handler.post(()->{
                 refreshPage(jsonData);
-                Log.e(TAG, "requestData: 刷新" );
             });
             String wCurrent = jsonObject.getString("WCurrent");
             JSONArray detail = jsonObject.getJSONArray("ROWS_DETAIL");
@@ -392,6 +391,8 @@ public class MainContentFragment extends BaseFragment {
                     objlist = null;
 
                 } catch (IOException e) {
+                    yvals.clear();
+                    colors.clear();
                     e.printStackTrace();
                 }
                 long endime = System.currentTimeMillis();

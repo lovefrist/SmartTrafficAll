@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.lenovo.smarttraffic.ui.activity.PaymentActivity;
+import com.lenovo.smarttraffic.ui.activity.UserAdminActivity;
+
 /**
  * @author Amoly
  * @date 2019/4/11.

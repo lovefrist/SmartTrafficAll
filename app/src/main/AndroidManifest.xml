@@ -26,7 +26,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activity.TextActivity" android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".ui.activity.PaymentActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activity.RecordActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.activity.CollectionActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.activity.ConsumptionActivity"
             android:screenOrientation="landscape"
@@ -100,10 +111,11 @@
             android:name=".ui.activity.Item1Activity"
             android:configChanges="orientation|screenSize|uiMode"
             android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoActionBar" /> <!-- 离线地图key -->
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!-- 离线地图key -->
         <meta-data
-            android:name="com.amap.api.v2.apikey"
-            android:value="bdc9db56ef3f82cb64db5c8212f0dddf" />
+        android:name="com.amap.api.v2.apikey"
+        android:value="bdc9db56ef3f82cb64db5c8212f0dddf" />
     </application>
 
 </manifest>

@@ -22,7 +22,8 @@ import java.util.List;
  *
  * @author asus
  */
-public class RecyhelperAdapter extends RecyclerView.Adapter<RecyhelperAdapter.ViewHolder> {
+public class
+RecyhelperAdapter extends RecyclerView.Adapter<RecyhelperAdapter.ViewHolder> {
     private Context context;
     private ArrayList<String> list;
     private boolean ID;
@@ -58,7 +59,7 @@ public class RecyhelperAdapter extends RecyclerView.Adapter<RecyhelperAdapter.Vi
             holder.iMacs.setImageResource(R.drawable.minus);
             holder.textView.setText(list.get(position));
             holder.relativeLayout.setOnLongClickListener(v -> {
-                Log.d(TAG, "onBindViewHolder: " + imageViewList.size());
+
                 mOnItemClickListener.longOnClick();
                 return false;
             });

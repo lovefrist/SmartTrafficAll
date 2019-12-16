@@ -29,4 +29,10 @@ public class MyViewRealerEvent extends RecyclerView {
         }
         return super.onInterceptTouchEvent(e);
     }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+
+        return super.dispatchTouchEvent(ev);
+    }
 }
