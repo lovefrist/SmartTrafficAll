@@ -21,7 +21,7 @@ import com.lenovo.smarttraffic.ui.activity.BaseActivity;
 import com.lenovo.smarttraffic.ui.activity.ForecastActivity;
 import com.lenovo.smarttraffic.ui.activity.Item1Activity;
 import com.lenovo.smarttraffic.ui.activity.LoginActivity;
-import com.lenovo.smarttraffic.ui.activity.SignActivity;
+import com.lenovo.smarttraffic.ui.activity.SecedeActivity;
 import com.lenovo.smarttraffic.ui.activity.UserAdminActivity;
 import com.lenovo.smarttraffic.ui.fragment.DesignFragment;
 import com.lenovo.smarttraffic.ui.fragment.MainContentFragment;
@@ -97,6 +97,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 this, mDrawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         toggle.syncState();
         mDrawer.addDrawerListener(toggle);
+        if (BaseActivity.user!= null) {
+            if ("user1".equals(BaseActivity.user)){
+                textView.setText("王安生");
+            }
+        }
         bottomNavigation.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.action_main:
@@ -231,7 +236,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 string = "item3";
                 break;
             case R.id.nav_setting:
-                Intent intent = new Intent(this, SignActivity.class);
+                Intent intent = new Intent(this, SecedeActivity.class);
                 startActivityForResult(intent, INTENT_LOGOUT);
                 break;
             case R.id.nav_about:
@@ -257,11 +262,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     protected void onStart() {
-        SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
-        int state = sharedPreferences.getInt("state", -1);
-        if (state == 0) {
-            textView.setText("点击头像登录");
-        }
+
         super.onStart();
     }
 }

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_Route1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/yuan_color_1"
+        android:gravity="center"
+        android:paddingRight="3dp"
+        android:paddingBottom="3dp"
+        android:text="1"
+        android:textColor="#fff"
+        android:textSize="25sp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/tv_Route2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_Route2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/yuan_color_2"
+        android:gravity="center"
+        android:paddingRight="3dp"
+        android:paddingBottom="3dp"
+        android:text="2"
+        android:textColor="#fff"
+        android:textSize="25sp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/tv_Route1"
+        app:layout_constraintRight_toLeftOf="@id/tv_Route3"
+        app:layout_constraintTop_toTopOf="@id/tv_Route1" />
+
+    <TextView
+        android:id="@+id/tv_Route3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/yuan_color_3"
+        android:gravity="center"
+        android:maxWidth="@dimen/margin_50"
+
+        android:maxHeight="@dimen/margin_50"
+        android:paddingRight="3dp"
+        android:paddingBottom="3dp"
+        android:text="3"
+        android:textColor="#fff"
+        android:textSize="25sp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/tv_Route2"
+        app:layout_constraintRight_toLeftOf="@id/tv_Route4"
+        app:layout_constraintTop_toTopOf="@id/tv_Route1" />
+
+    <TextView
+        android:id="@+id/tv_Route4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/yuan_color_4"
+        android:gravity="center"
+        android:paddingRight="3dp"
+        android:paddingBottom="3dp"
+        android:text="4"
+        android:textColor="#fff"
+        android:textSize="25sp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/tv_Route3"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_Route1" />
+
+    <TextView
+        android:id="@+id/tv_Route5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/yuan_color_5"
+        android:gravity="center"
+        android:paddingRight="3dp"
+        android:paddingBottom="3dp"
+        android:text="10"
+        android:textColor="#fff"
+        android:textSize="25sp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/tv_Route6"
+        app:layout_constraintTop_toBottomOf="@id/tv_Route1" />
+
+    <TextView
+        android:id="@+id/tv_Route6"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/yuan_color_6"
+        android:gravity="center"
+        android:paddingRight="3dp"
+        android:paddingBottom="3dp"
+        android:text="S1"
+        android:textColor="#fff"
+        android:textSize="25sp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/tv_Route5"
+        app:layout_constraintRight_toLeftOf="@id/tv_Route7"
+        app:layout_constraintTop_toTopOf="@id/tv_Route5" />
+
+    <TextView
+        android:id="@+id/tv_Route7"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/yuan_color_7"
+        android:gravity="center"
+        android:paddingRight="3dp"
+        android:paddingBottom="3dp"
+        android:text="S3"
+        android:textColor="#fff"
+        android:textSize="25sp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/tv_Route6"
+        app:layout_constraintRight_toRightOf="@id/tv_Route8"
+        app:layout_constraintTop_toTopOf="@id/tv_Route5" />
+
+    <TextView
+        android:id="@+id/tv_Route8"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/yuan_color_8"
+        android:gravity="center"
+        android:paddingRight="3dp"
+        android:paddingBottom="3dp"
+        android:text="S8"
+        android:textColor="#fff"
+        android:textSize="25sp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/tv_Route7"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_Route5" />
+</android.support.constraint.ConstraintLayout>

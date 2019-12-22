@@ -6,18 +6,24 @@ import android.os.Bundle;
 import com.lenovo.smarttraffic.R;
 
 /**
+ * 出行建议
  * @author asus
+ *
  */
-public class SetInstallActivity extends BaseActivity {
+public class MetroAdviceActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initView();
+    }
 
+    private void initView() {
+        initToolBar(findViewById(R.id.toolbar),true,"出行建议");
     }
 
     @Override
     protected int getLayout() {
-        return R.layout.activity_set_install;
+        return R.layout.activity_metroadvice;
     }
 }

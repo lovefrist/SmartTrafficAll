@@ -30,7 +30,7 @@ import android.widget.Toast;
 
 import com.lenovo.smarttraffic.InitApp;
 import com.lenovo.smarttraffic.R;
-import com.lenovo.smarttraffic.sql.MyConnectSQL;
+import com.lenovo.smarttraffic.sql.MyConnectSql;
 import com.lenovo.smarttraffic.util.NetworkUtil;
 
 import org.json.JSONArray;
@@ -292,7 +292,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 JSONArray Detail = jsonObjectDETAIL.getJSONArray("ROWS_DETAIL");
                         if (!(RO1.equals(ROT))) {
                             int[] icon = new int[]{R.drawable.touxiang_1, R.drawable.touxiang_2};
-                            SQLiteDatabase db = MyConnectSQL.initMySQL(this, "userAdmin", null, 1, 2).getWritableDatabase();
+                            SQLiteDatabase db = MyConnectSql.initMySQL(this, "userAdmin", null, 1, 2).getWritableDatabase();
                             Cursor cursor = db.query("userData", null, null, null, null, null, null);
                             if (!cursor.moveToFirst()) {
                                 for (int i = 0; i < Detail.length(); i++) {

@@ -11,7 +11,7 @@ import com.lenovo.smarttraffic.R;
 import com.lenovo.smarttraffic.entityclass.UserInfo;
 import com.lenovo.smarttraffic.myview.MyRealerViewSidestep;
 import com.lenovo.smarttraffic.myview.MyViewRealerEvent;
-import com.lenovo.smarttraffic.sql.MyConnectSQL;
+import com.lenovo.smarttraffic.sql.MyConnectSql;
 import com.lenovo.smarttraffic.ui.adapter.SidestepAdapter;
 
 import java.util.ArrayList;
@@ -57,7 +57,7 @@ public class UserAdminActivity extends BaseActivity {
         service.execute(() -> {
             Log.d(TAG, "getUsername: ");
             userDataList.clear();
-            db = MyConnectSQL.initMySQL(this,"userAdmin",null,1,2).getWritableDatabase();
+            db = MyConnectSql.initMySQL(this,"userAdmin",null,1,2).getWritableDatabase();
               Cursor cursor = db.query("userData",null,null,null,null,null,null);
               if (cursor.moveToFirst()){
                   do {

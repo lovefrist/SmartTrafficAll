@@ -1,8 +1,6 @@
 package com.lenovo.smarttraffic.ui.activity;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -18,14 +16,13 @@ import android.widget.LinearLayout;
 
 import com.lenovo.smarttraffic.InitApp;
 import com.lenovo.smarttraffic.R;
-import com.lenovo.smarttraffic.sql.MyConnectSQL;
+import com.lenovo.smarttraffic.sql.MyConnectSql;
 import com.lenovo.smarttraffic.ui.adapter.BasePagerAdapter;
 import com.lenovo.smarttraffic.ui.adapter.ConsultationAdapter;
 import com.lenovo.smarttraffic.ui.fragment.FirstFragment;
 import com.lenovo.smarttraffic.util.CommonUtil;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 
@@ -72,7 +69,7 @@ public class Item1Activity extends BaseActivity {
 
     private void InitData() {
        ArrayList<String> titleList = new ArrayList<>();
-        SQLiteDatabase db = MyConnectSQL.initMySQL(this, "ItemData", null, 4,1).getWritableDatabase();
+        SQLiteDatabase db = MyConnectSql.initMySQL(this, "ItemData", null, 4,1).getWritableDatabase();
        Cursor cursor = db.query("contentItem",null,"state = ?",new String[]{"1"},null,null,null);
         if (cursor.moveToFirst()){
             do {
@@ -143,7 +140,7 @@ public class Item1Activity extends BaseActivity {
             if (data != null) {
                 String[] datall = data.getExtras().getStringArray("contentall");
                 basePagerAdapter.recreateItemsTitle(datall);
-                SQLiteDatabase database = MyConnectSQL.initMySQL(this, "ItemData", null, 4,1).getWritableDatabase();
+                SQLiteDatabase database = MyConnectSql.initMySQL(this, "ItemData", null, 4,1).getWritableDatabase();
                Cursor cursor = database.query("contentItem",null,null,null,null,null,null);
                if (cursor.moveToFirst()){
                    do {

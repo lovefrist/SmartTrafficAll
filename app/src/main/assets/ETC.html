@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ETC账号</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+</head>
+<style type="text/css">
+		.yellow {
+			background: blue;
+		}
+
+
+
+
+</style>
+<script type="text/javascript">
+
+
+		function query(){
+			carNumber =document.getElementById("what_car");
+				var index = carNumber.value;
+				java.queryMoney(index);
+		}
+
+		function setQueryMoney(carMoney){
+			mandy = document.getElementById("money");
+			selectSuccess = document.getElementById("select_success");
+			selectSuccess.innerHTML = "查询完成";
+			inputSuccess = document.getElementById("input_success");
+			inputSuccess.innerHTML = "";
+			mandy.innerHTML = carMoney;
+		}
+
+      function  Recharge(){
+      	   whatMoney = document.getElementById("what_money");
+           carNumber =document.getElementById("what_car");
+		   var carId = carNumber.value;
+		   var reachMoney = whatMoney.value;
+		   java.Recharge(carId,reachMoney);
+      }
+
+    function  setReachMoney(carMoney){
+			mandy = document.getElementById("money");
+			inputSuccess = document.getElementById("input_success");
+			inputSuccess.innerHTML = "充值成功";
+
+			mandy.innerHTML = carMoney;
+		}
+	 function sqrtData(){
+		 whatPlusher = document.getElementById("whatPlus_car");
+		 //通过名字获取  getElementsByName
+		var obj = document.getElementsByName("Fruit");
+		//通过标签获取  getElementsByTagName
+		// var obj = document.getElementsByTagName("Fruit");
+		var sqrtStyle;
+		for(var i=0; i<obj.length; i ++){
+        if(obj[i].checked){
+			sqrtStyle = obj[i].value;
+			}
+		}
+		 var car = whatPlusher.value;
+		 java.sqrtReach(car,sqrtStyle);
+	 }
+
+</script>
+
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-5 text-right">
+            <h3>ETC账户信息</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-5 text-right">
+            <h4>账户余额:</h4>
+        </div>
+        <div class="col-sm-4 text-left">
+            <h4 id="money"></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-5 text-right">
+            <h4>车号:</h4>
+        </div>
+        <div class="col-sm-2 text-left" style="width: 120px;margin-top: 15px;">
+            <select id="what_car" class="form-control">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+        </div>
+        <div class="col-sm-2 text-left" style="width: 120px;margin-top: 15px;">
+            <button id="select_money" type="button" class="btn btn-default" style="width: 80px;"
+                    onclick="query()">
+                查询
+            </button>
+        </div>
+        <div class="col-sm-2" style="color: red;">
+            <h4 id="select_success"></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-5 text-right">
+            <h4>充值金额:</h4>
+        </div>
+        <div class="col-sm-2 text-left" style="width: 120px;margin-top: 15px;">
+            <select id="what_money" class="form-control">
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="150">150</option>
+                <option value="200">200</option>
+            </select>
+        </div>
+        <div class="col-sm-2" style="width: 120px;margin-top: 15px;">
+            <button id="input_money" type="button" class="btn btn-default" style="width: 80px;"
+                    onclick="Recharge()">充值
+            </button>
+        </div>
+        <div class="col-sm-2 text-left" style="color: red;">
+            <h4 id="input_success"></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="text-right col-sm-5">
+            <h3>查询充值记录：</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-5 text-right">
+            <h4>车号:</h4>
+        </div>
+        <div class="col-sm-2 text-left" style="width: 120px;margin-top: 15px;">
+            <select id="whatPlus_car" class="form-control">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+        </div>
+        <div class="col-sm-2 text-left"  style="width: 120px;margin-top: 7px;">
+            <form action="" method="post" id="sqrtForm">
+                <label> <input name="Fruit" type="radio" value="0" checked="checked"/>时间降序</label><br />
+                <label> <input name="Fruit" type="radio" value="1"/>时间升序</label>
+            </form>
+        </div>
+        <div class="col-sm-2 text-left"  style="width: 120px;margin-top: 15px;">
+            <button type="button" class="btn btn-default" style="width: 80px;" onclick="sqrtData()">查询</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

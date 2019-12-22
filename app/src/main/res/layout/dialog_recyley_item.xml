@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/tv_Transfer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/arc_transfer"
+        android:padding="5dp"
+        android:text="可换乘3号"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:background="@color/Blue"/>
+        <TextView
+            android:id="@+id/tv_textRoute1"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/yuanbule_white"
+            />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:background="@color/Blue"/>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_textRoute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="幸福路"
+        android:ems="1"
+
+        android:layout_gravity="center_horizontal"/>
+</LinearLayout>

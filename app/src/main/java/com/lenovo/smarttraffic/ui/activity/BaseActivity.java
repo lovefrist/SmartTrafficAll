@@ -16,7 +16,6 @@ import com.lenovo.smarttraffic.util.ToolbarUtil;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -38,20 +37,48 @@ import okhttp3.Response;
  */
 
 public abstract class BaseActivity extends SupportActivity {
-    public String TAG = getClass().getSimpleName();
-
-    public static String user;
+    public static String user = "user1";
     public static Handler handler = new Handler();
-
-    private Unbinder unbind;
     public static ExecutorService service =
             new ThreadPoolExecutor(7, 20, 10, TimeUnit.MILLISECONDS,
-            //等待队列
-            new ArrayBlockingQueue<Runnable>(10),
-            //销毁策略 如果线程大于等待的和最大的相加,丢弃任务，执行销毁策略
-            new ThreadPoolExecutor.CallerRunsPolicy());
+                    //等待队列
+                    new ArrayBlockingQueue<Runnable>(10),
+                    //销毁策略 如果线程大于等待的和最大的相加,丢弃任务，执行销毁策略
+                    new ThreadPoolExecutor.CallerRunsPolicy());
     private static String hendr;
+    public String TAG = getClass().getSimpleName();
+    private Unbinder unbind;
 
+    public static String newGetJsonData(HashMap<String, Object> map, String uri) throws IOException {
+        Gson gson = new GsonBuilder().enableComplexMapKeySerialization().create();
+        MediaType mediaType = MediaType.parse("application/json");
+        String parms = gson.toJson(map);
+        RequestBody requestBody = RequestBody.create(mediaType, parms);
+        Request request = new Request.Builder().post(requestBody).url( uri).build();
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Response response = okHttpClient.newCall(request).execute();
+        return response.body().string();
+    }
+
+    public static String getJsonData(HashMap<String, Object> map, String uri) throws IOException {
+
+        Gson gson = new GsonBuilder().enableComplexMapKeySerialization().create();
+        MediaType mediaType = MediaType.parse("application/json");
+        String parms = gson.toJson(map);
+        RequestBody requestBody = RequestBody.create(mediaType, parms);
+        Request request = new Request.Builder().post(requestBody).url(hendr + uri).build();
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Response response = okHttpClient.newCall(request).execute();
+        return response.body().string();
+    }
+
+    private static void mainGetIppPort() {
+        SharedPreferences preferences = InitApp.getInstance().getSharedPreferences("IpPort", Context.MODE_PRIVATE);
+        String Ip = preferences.getString("IP", "192.168.3.5");
+        String Port = preferences.getString("Port", "8088");
+
+        hendr = "http://" + Ip + ":" + Port + "/transportservice/action/";
+    }
 
     /**
      * 初始化 Toolbar
@@ -73,9 +100,6 @@ public abstract class BaseActivity extends SupportActivity {
         mainGetIppPort();
     }
 
-
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -96,28 +120,9 @@ public abstract class BaseActivity extends SupportActivity {
         }
     }
 
-
-
-    public static String newGetJsonData(HashMap<String,Object> map, String uri) throws IOException {
-        Gson gson = new GsonBuilder().enableComplexMapKeySerialization().create();
-        MediaType mediaType = MediaType.parse("application/json");
-        String parms = gson.toJson(map);
-        RequestBody requestBody = RequestBody.create(mediaType, parms);
-        Request request = new Request.Builder().post(requestBody).url(uri).build();
-        OkHttpClient okHttpClient = new OkHttpClient();
-        Response response = okHttpClient.newCall(request).execute();
-        return response.body().string();
-    }
-
-    private static void mainGetIppPort() {
-        SharedPreferences preferences = InitApp.getInstance().getSharedPreferences("IpPort",Context.MODE_PRIVATE);
-        String Ip = preferences.getString("IP","193.168.3.5");
-        String Port = preferences.getString("Port","8088");
-        hendr = "http://"+Ip+":"+Port+"/transportservice/action";
-    }
-
     /**
      * 得到控件的布局
+     *
      * @return 返回布局的int
      **/
     protected abstract int getLayout();
@@ -145,11 +150,13 @@ public abstract class BaseActivity extends SupportActivity {
         Log.d(TAG, "onRestart: ");
         super.onRestart();
     }
+
     @Override
     protected void onResume() {
         Log.d(TAG, "onResume: ");
         super.onResume();
     }
+
     @Override
     protected void onDestroy() {
         Log.d(TAG, "onDestroy: ");

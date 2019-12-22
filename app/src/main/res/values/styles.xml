@@ -44,4 +44,10 @@
         <item name="tabTextAppearance">@style/TextAppearance.Design.Tab</item>
         <item name="tabSelectedTextColor">?android:textColorPrimary</item>
     </style>
+    <style name="FullActivity" parent="AppTheme">
+        <item name="windowNoTitle">true</item>
+<!--        指示此窗口是否应填满整个屏幕的标志-->
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
 </resources>

@@ -2,7 +2,6 @@ package com.lenovo.smarttraffic.ui.activity;
 
 import android.content.ContentValues;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
@@ -15,15 +14,13 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CalendarView;
 
 import com.lenovo.smarttraffic.R;
 import com.lenovo.smarttraffic.myinterface.OnItemClickListener;
-import com.lenovo.smarttraffic.sql.MyConnectSQL;
+import com.lenovo.smarttraffic.sql.MyConnectSql;
 import com.lenovo.smarttraffic.ui.adapter.RecyhelperAdapter;
 import com.lenovo.smarttraffic.util.CommonUtil;
 
-import java.sql.SQLDataException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -60,7 +57,7 @@ public class AddItemActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initToolBar(findViewById(R.id.toolbar), true, "添加资讯");
-        db = MyConnectSQL.initMySQL(this, "ItemData", null, 4,1).getWritableDatabase();
+        db = MyConnectSql.initMySQL(this, "ItemData", null, 4,1).getWritableDatabase();
         Cursor cursor = db.query("contentItem", null, null, null, null, null, null);
         bottomDate = new ArrayList<>();
         topData = new ArrayList<>();

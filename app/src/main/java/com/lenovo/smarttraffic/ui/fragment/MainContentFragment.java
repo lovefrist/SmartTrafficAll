@@ -27,10 +27,11 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.lenovo.smarttraffic.InitApp;
 import com.lenovo.smarttraffic.R;
-import com.lenovo.smarttraffic.ui.activity.ConsumptionActivity;
+import com.lenovo.smarttraffic.ui.activity.BaseActivity;
 import com.lenovo.smarttraffic.ui.activity.ForecastActivity;
+import com.lenovo.smarttraffic.ui.activity.MapDataActivity;
 import com.lenovo.smarttraffic.ui.activity.MetroActivity;
-import com.lenovo.smarttraffic.ui.activity.SetInstallActivity;
+import com.lenovo.smarttraffic.ui.activity.SignActivity;
 import com.lenovo.smarttraffic.ui.activity.UserAdminActivity;
 import com.lenovo.smarttraffic.util.NetworkUtil;
 
@@ -99,7 +100,7 @@ public class MainContentFragment extends BaseFragment {
         setViewContent(view);
         showRingPieChart();
 //        广播
-        initroadcast();
+        initrans();
         return view;
     }
 
@@ -162,8 +163,7 @@ public class MainContentFragment extends BaseFragment {
         RelativeLayout relativeLayout = view.findViewById(R.id.home_manager_center);
         relativeLayout.setOnClickListener(v -> {
             if (!chang.equals(userdata.getText().toString())) {
-                Intent intent = new Intent(getActivity(), UserAdminActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(getActivity(), UserAdminActivity.class));
             } else {
                 Toast.makeText(getActivity(), "您未登录，请登录后查看", Toast.LENGTH_SHORT).show();
             }
@@ -171,19 +171,26 @@ public class MainContentFragment extends BaseFragment {
         /**-----------------------------------------------------------设置消费中心点击-------------------------------------------------------------------------*/
         RelativeLayout consumption = view.findViewById(R.id.consumption);
         consumption.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), SetInstallActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(getActivity(), MapDataActivity.class));
         });
 
         /**-----------------------------------------------------------设置用户签到点击-------------------------------------------------------------------------*/
         RelativeLayout Sing = view.findViewById(R.id.Sing);
-        consumption.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), ConsumptionActivity.class);
-            startActivity(intent);
+        Sing.setOnClickListener(v -> {
+            if (BaseActivity.user!=null){
+                startActivity(new Intent(getActivity(), SignActivity.class));
+            }else {
+                Toast.makeText(getContext(),"请先登陆",Toast.LENGTH_LONG).show();
+            }
+
         });
+        Log.d(TAG, "setViewContent: 获取数据");
+        getweather();
+        setPieChart();
+        setTherrView();
     }
 
-    private void initroadcast() {
+    private void initrans() {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
         work = new Work();
@@ -354,6 +361,7 @@ public class MainContentFragment extends BaseFragment {
     private void setPieChart() {
         service.execute(() -> {
             while (keypm) {
+
                 long starttime = System.currentTimeMillis();
                 try {
                     yvals.clear();
@@ -363,6 +371,7 @@ public class MainContentFragment extends BaseFragment {
                     map.put("UserName", "user1");
                     String JsonData = NetworkUtil.getJsonData(map, getPm25);
                     objlist = JsonData;
+                    Log.d(TAG, "setPieChart: "+JsonData);
                     JSONObject jsonObject = new JSONObject(JsonData);
 
                     int pm25 = jsonObject.getInt("pm2.5");
@@ -501,7 +510,7 @@ public class MainContentFragment extends BaseFragment {
 
     @Override
     public void onStop() {
-        keypm = false;
+
         super.onStop();
     }
 
@@ -510,9 +519,6 @@ public class MainContentFragment extends BaseFragment {
         super.onStart();
         anInt = 1;
         keypm = true;
-        getweather();
-        setPieChart();
-        setTherrView();
 
     }
 

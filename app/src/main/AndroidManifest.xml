@@ -25,11 +25,33 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+
         android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".ui.activity.MetroAdviceActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".ui.activity.MetroLineActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.activity.SignActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.activity.ParkDetailsActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.activity.MapDataActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.activity.PaymentActivity"
             android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.activity.RecordActivity"
             android:screenOrientation="landscape"
@@ -39,19 +61,11 @@
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.activity.ConsumptionActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".ui.activity.DetaTitleActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.activity.SetInstallActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ui.activity.SignActivity"
+            android:name=".ui.activity.SecedeActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -62,10 +76,9 @@
             android:name=".ui.activity.UserAdminActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ui.activity.MetroActivity"
+        <activity android:name=".ui.activity.MetroActivity"
             android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".ui.activity.InformationActivity"
             android:screenOrientation="landscape"
@@ -111,11 +124,11 @@
             android:name=".ui.activity.Item1Activity"
             android:configChanges="orientation|screenSize|uiMode"
             android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <!-- 离线地图key -->
+            android:theme="@style/AppTheme.NoActionBar" /> <!-- 离线地图key -->
         <meta-data
-        android:name="com.amap.api.v2.apikey"
-        android:value="bdc9db56ef3f82cb64db5c8212f0dddf" />
+            android:name="com.amap.api.v2.apikey"
+            android:value="bdc9db56ef3f82cb64db5c8212f0dddf" />
+
     </application>
 
 </manifest>

@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-
-import com.lenovo.smarttraffic.ui.activity.PaymentActivity;
-import com.lenovo.smarttraffic.ui.activity.UserAdminActivity;
+import android.util.Log;
 
 /**
  * @author Amoly
@@ -22,7 +20,7 @@ public class SplashActivity extends AppCompatActivity {
             Intent intent = new Intent(SplashActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
-        },1000);
+        }, 1000);
 
     }
 

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/linear_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="#fff"
+    android:paddingVertical="10dp"
+    android:paddingHorizontal="15dp"
+    >
+    <TextView
+        android:id="@+id/tv_position"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:background="@drawable/yuan_white"
+        android:text="1"
+        android:gravity="center"
+        android:layout_gravity="center"
+        />
+
+
+        <TextView
+            android:id="@+id/tv_contentPark"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="南京工业职业技术学院停车场\n空车位5个，停车费5元/小时\n南京栖霞区洋山北路1号 331m"
+            android:layout_marginLeft="10dp"
+            />
+    <ImageView
+        android:id="@+id/iv_jump"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/option_checked"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+
+        />
+    <TextView
+        android:id="@+id/tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="已满"
+        android:textSize="22dp"
+        android:textColor="#DCF41C"
+        />
+
+
+</LinearLayout>
